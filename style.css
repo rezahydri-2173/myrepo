@@ -1,0 +1,267 @@
+/* style.css
+    A compact, modern base stylesheet with variables, utilities, components, and responsive rules.
+    Drop into your project and customize variables under :root.
+*/
+
+/* ========== VARIABLES ========== */
+:root{
+  --color-bg: #ffffff;
+  --color-surface: #f8fafb;
+  --color-border: #e6eef2;
+  --color-text: #131313;
+  --color-muted: #64748b;
+  --color-primary: #0ea5a4; /* teal */
+  --color-primary-contrast: #ffffff;
+  --color-secondary: #2563eb; /* blue */
+  --radius: 8px;
+  --shadow-sm: 0 1px 2px rgba(16,24,40,0.05);
+  --shadow-md: 0 6px 18px rgba(16,24,40,0.08);
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --content-max: 1100px;
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark){
+  :root{
+     --color-bg: #0b1220;
+     --color-surface: #071023;
+     --color-border: rgba(255,255,255,0.06);
+     --color-text: #e6eef6;
+     --color-muted: #94a3b8;
+     --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
+     --shadow-md: 0 8px 24px rgba(0,0,0,0.6);
+  }
+}
+
+/* ========== RESET / BASE ========== */
+*,
+*::before,
+*::after{box-sizing: border-box}
+
+html{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  font-size: 16px;
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* remove default margins for common elements */
+h1,h2,h3,h4,p,figure,blockquote,dl,ul,ol,pre{margin:0}
+
+/* images & media */
+img, picture, video, canvas, svg{display:block;max-width:100%;height:auto}
+
+/* links */
+a{
+  color: inherit;
+  text-decoration: none;
+}
+a:hover{text-decoration: underline}
+
+/* forms reset */
+button, input, select, textarea{font: inherit; color: inherit}
+
+/* accessible outline for keyboard users */
+:focus{
+  outline: none;
+}
+:focus-visible{
+  outline: 3px solid color-mix(in srgb, var(--color-primary) 50%, transparent);
+  outline-offset: 3px;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+/* reduce motion preference */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important}
+}
+
+/* ========== TYPOGRAPHY ========== */
+/* fluid type for headings */
+h1{font-size: clamp(1.6rem, 2.6vw + 0.8rem, 2.4rem); font-weight: 700; line-height:1.1}
+h2{font-size: clamp(1.25rem, 2vw + 0.6rem, 1.6rem); font-weight: 700}
+h3{font-size: 1.125rem; font-weight: 600}
+p{font-size: 1rem; color: var(--color-text); margin-bottom: var(--space-md)}
+
+/* utility small text */
+.lead{font-size:1.125rem; color: var(--color-muted); margin-bottom: var(--space-md)}
+.muted{color: var(--color-muted)}
+
+/* ========== LAYOUT ========== */
+.container{
+  width: 100%;
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+}
+
+/* simple responsive grid */
+.grid{
+  display: grid;
+  gap: var(--space-lg);
+}
+.grid-2{grid-template-columns: repeat(2, 1fr)}
+.grid-3{grid-template-columns: repeat(3, 1fr)}
+.grid-responsive{
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* stack helper */
+.stack{display:flex;flex-direction:column;gap:var(--space-sm)}
+.row{display:flex;gap:var(--space-md);align-items:center}
+
+/* center helpers */
+.center{display:flex;align-items:center;justify-content:center}
+
+/* full-bleed hero */
+.hero{
+  padding: calc(var(--space-xl) + var(--space-lg)) var(--space-lg);
+  background: linear-gradient(180deg, rgba(14,165,164,0.06), transparent);
+  border-radius: calc(var(--radius) * 1.25);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ========== SURFACE / CARD ========== */
+.surface{
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-md);
+}
+
+/* ========== NAV / HEADER ========== */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.brand{font-weight:700;letter-spacing: -0.02em}
+.nav{display:flex;gap:var(--space-md);align-items:center}
+
+/* ========== BUTTONS ========== */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease;
+  box-shadow: var(--shadow-sm);
+}
+.btn:active{transform: translateY(1px)}
+.btn[disabled]{opacity:.6;cursor:not-allowed;transform:none}
+
+.btn-primary{
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+.btn-primary:hover{filter:brightness(0.98)}
+.btn-secondary{
+  background: var(--color-secondary);
+  color: var(--color-primary-contrast);
+  border-color: color-mix(in srgb, var(--color-secondary) 20%, transparent);
+}
+.btn-ghost{
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-text);
+}
+
+/* icon-only */
+.btn-icon{padding: 8px; width: 40px; height: 40px}
+
+/* ========== FORMS ========== */
+.input, textarea, select{
+  width:100%;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: none;
+}
+textarea{min-height:120px;resize:vertical}
+.input:focus, textarea:focus, select:focus{
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 12%, transparent);
+  outline: none;
+}
+
+/* form row */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md)}
+@media (max-width:640px){.form-row{grid-template-columns:1fr}}
+
+/* ========== LISTS / TABLES ========== */
+.list-reset{list-style:none;padding:0;margin:0}
+.table{width:100%;border-collapse:collapse}
+.table th, .table td{padding:12px 8px;border-bottom:1px solid var(--color-border);text-align:left}
+
+/* ========== MISC UTILITIES ========== */
+.sr-only, .visually-hidden{
+  position:absolute!important;
+  height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px;
+}
+.badge{
+  display:inline-block;padding:4px 8px;border-radius:999px;background:var(--color-surface);border:1px solid var(--color-border);font-size:.85rem;
+}
+
+/* spacing helpers */
+.mt-xs{margin-top:var(--space-xs)} .mt-sm{margin-top:var(--space-sm)} .mt-md{margin-top:var(--space-md)}
+.mb-sm{margin-bottom:var(--space-sm)} .mb-md{margin-bottom:var(--space-md)}
+
+/* responsiveness */
+@media (max-width:900px){
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .container{padding-left:var(--space-md);padding-right:var(--space-md)}
+}
+@media (max-width:600px){
+  .grid-2{grid-template-columns:1fr}
+  .header{flex-direction:column;align-items:flex-start;gap:var(--space-xs)}
+}
+
+/* ========== PRINT STYLES ========== */
+@media print{
+  body{background:#fff;color:#111}
+  .header,.btn,.nav{display:none}
+  .container{padding:0}
+}
+
+/* ========== EXAMPLES for quick prototyping (remove if unused) ========== */
+/* .card-grid for quick list of cards */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md)}
